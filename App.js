@@ -1,21 +1,8 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React, { Component } from 'react';
+import RootStack from './src/navigate/RootStack';
 
-import React from 'react';
-import { View } from 'react-native';
-import Header from './src/components/Header';
-import AlbumList from './src/components/AlbumList';
-
-const App = () => (
-  <View style={{ flex: 1 }}>
-    <Header headerText={'Music Albums'} />
-    <AlbumList />
-  </View>
-);
-
-export default App;
+export default class App extends Component {
+  render() {
+    return <RootStack />;
+  }
+}
