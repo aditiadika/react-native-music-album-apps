@@ -1,8 +1,51 @@
 import React, { Component } from 'react';
-import { Button, Card, CardSection, Input } from './common';
+import { Text, StyleSheet } from 'react-native';
+import firebase from 'firebase';
+import { Button, Card, CardSection, Input, Spinner } from './common';
+
+// in on button press -> 
+// if user fail login firebase automaticaly make record for user, if succes navigate to music album
+
+// in login prosses store data and hide spinner and error massage 
+// email, password, spinner, and error 
 
 class LoginForm extends Component {
-    state = { email: '', password: '' }
+    state = { email: '', password: '', error: '', loading: false }
+
+    onButtonPress() {
+        const { email, password } = this.state;
+
+        this.setState({ error: '', loading: true });
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(this.onLoginSuccess.bind(this))
+            .catch(() => {
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .then(this.onLoginSuccess.bind(this))
+                    .catch(this.onLoginFailed.bind(this));
+            });
+    }
+
+    onLoginFailed() {
+        this.setState({ error: 'Authenticated Failed!', loading: false });
+    }
+
+    onLoginSuccess() {
+        const { navigate } = this.props.navigation;
+        navigate('albums');
+    }
+
+    renderButton() {
+        if (this.state.loading) {
+            return <Spinner size="small" />;
+        }
+
+        return (
+            <Button onPress={this.onButtonPress.bind(this)}>
+                Login
+            </Button>
+        );
+    }
 
     render() {
         return (
@@ -25,12 +68,24 @@ class LoginForm extends Component {
                     />
                 </CardSection>
 
+                <Text style={styles.errorTextStyle}>{this.state.error}</Text>
+
                 <CardSection>
-                    <Button onPress={() => this.props.navigation.navigate('albums')} children="LogIn" />
+                    {this.renderButton()}
                 </CardSection>
             </Card>
         );
     }
 }
 
+const styles = StyleSheet.create({
+    errorTextStyle: {
+        color: 'red',
+        fontSize: 15,
+        alignSelf: 'center'
+    },
+});
+
 export default LoginForm;
+
+// <Button onPress={() => this.props.navigation.navigate('albums')} children="LogIn" />

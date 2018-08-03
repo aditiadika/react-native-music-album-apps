@@ -4,10 +4,14 @@ import firebase from 'firebase';
 import { HeaderLogIn } from '../Auth/common';
 import LoginForm from '../Auth/LoginForm';
 
+// in authStateChanged user value is true, is not user value is "undefined"
+
 class LoginScreen extends Component {
   static navigationOptions = {
     header: null
   }
+
+  state = { loggedIn: false }
 
   componentWillMount() {
     const config = {
@@ -19,6 +23,14 @@ class LoginScreen extends Component {
       messagingSenderId: '965015435284'
     };
     firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ loggedIn: true });
+      } else {
+        this.setState({ loggedIn: false });
+      }
+    });
   }
   
   render() {
