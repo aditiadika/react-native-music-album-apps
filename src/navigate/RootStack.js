@@ -5,7 +5,7 @@ import Logout from './Logout';
 
 const RootStack = createStackNavigator(
     {
-        login: LoginScreen,
+        login: { screen: LoginScreen, header: null },
         albums: MusicAlbum,
     },
     {

@@ -1,47 +1,128 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import firebase from 'firebase';
-import { HeaderLogIn } from '../Auth/common';
-import LoginForm from '../Auth/LoginForm';
-
-// in authStateChanged user value is true, is not user value is "undefined"
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image } from 'react-native';
+import RNAccountKit from 'react-native-facebook-account-kit';
+import image from '../../asset/add.png';
 
 class LoginScreen extends Component {
-  static navigationOptions = {
-    header: null
-  }
+    static navigationOptions = {
+        header: null
+    }
 
-  state = { loggedIn: false }
+    login() {
+        RNAccountKit.loginWithPhone()
+            .then((token) => {
+                if (!token) {
+                    console.log('Login cancelled');
+                } else {
+                    const { navigate } = this.props.navigation;
+                    navigate('albums');
+                }
+            })
+            .catch(() => console.log('erorr here'));
+    }
 
-  componentWillMount() {
-    const config = {
-      apiKey: 'AIzaSyBp47moMbBGiUNkAlkbE9T3UseDYxAi8qg',
-      authDomain: 'auth-bf648.firebaseapp.com',
-      databaseURL: 'https://auth-bf648.firebaseio.com',
-      projectId: 'auth-bf648',
-      storageBucket: 'auth-bf648.appspot.com',
-      messagingSenderId: '965015435284'
-    };
-    firebase.initializeApp(config);
+    render() {
+        return (
+            <View style={styles.mainContainerView}>
+                <View style={styles.titleView}>
+                    <Text style={styles.textView}> Album Music Apps </Text>
+                </View>
 
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ loggedIn: true });
-      } else {
-        this.setState({ loggedIn: false });
-      }
-    });
-  }
-  
-  render() {
-    return (
-      <View>
-        <HeaderLogIn headerText={'Authentication'} />
-        <LoginForm navigation={this.props.navigation} />
-      </View>
-    );
-  }
+                <View style={styles.subTitleView}>
+                    <Text style={styles.textSubtitle}> The Music Market Place </Text>
+                </View>
+
+                <View style={styles.imageView}>
+                    <Image style={styles.image} source={image} />
+                </View>
+
+                <View style={styles.buttonView}>
+                    <TouchableOpacity style={styles.signInButton} onPress={() => this.login()}>
+                        <Text style={styles.textLogin}> Login </Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        );
+    }
 }
 
-export default LoginScreen;
+const { width, height } = Dimensions.get('window');
+const styles = StyleSheet.create({
+    mainContainerView: {
+        width,
+        height,
+        backgroundColor: 'black',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingBottom: 80
+    },
 
+    titleView: {
+        flex: 2,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+
+    },
+
+    textView: {
+        color: 'white',
+        marginTop: 20,
+        fontSize: 30,
+        fontWeight: 'bold'
+    },
+
+    subTitleView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    textSubtitle: {
+        color: 'white',
+        fontSize: 15,
+    },
+
+    imageView: {
+        backgroundColor: 'white',
+        width,
+        height: width * (9 / 12),
+    },
+
+    image: {
+        width: '100%',
+        height: '100%'
+    },
+
+    buttonView: {
+        flex: 3,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    signInButton: {
+        backgroundColor: 'white',
+        marginRight: 8,
+        borderRadius: 2,
+        width: '40%',
+        height: '20%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    textLogin: {
+        color: 'black',
+    },
+
+    registerButton: {
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        marginLeft: 8,
+        borderRadius: 2,
+        alignItems: 'center',
+        width: '40%',
+        height: '20%',
+    }
+});
+
+export default LoginScreen;
