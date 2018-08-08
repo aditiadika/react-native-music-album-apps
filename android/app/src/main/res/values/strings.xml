@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Albums</string>
+    <string name="fb_app_id">298484040713917</string>
+    <string name="ak_client_token">2a7df02986c4148b0c288491072209bc</string>
 </resources>

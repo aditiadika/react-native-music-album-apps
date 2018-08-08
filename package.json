@@ -9,8 +9,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "firebase": "^4.9.1",
+    "native-base": "^2.7.2",
     "react": "16.4.1",
     "react-native": "0.56.0",
+    "react-native-facebook-account-kit": "^0.10.1",
     "react-navigation": "^2.9.3"
   },
   "devDependencies": {
