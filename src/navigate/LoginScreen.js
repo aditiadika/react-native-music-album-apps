@@ -9,16 +9,16 @@ class LoginScreen extends Component {
     }
 
     login() {
-        RNAccountKit.loginWithPhone()
-            .then((token) => {
-                if (!token) {
-                    console.log('Login cancelled');
-                } else {
+        // RNAccountKit.loginWithPhone()
+        //     .then((token) => {
+        //         if (!token) {
+        //             console.log('Login cancelled');
+        //         } else {
                     const { navigate } = this.props.navigation;
-                    navigate('albums');
-                }
-            })
-            .catch(() => console.log('erorr here'));
+                    navigate('AlbumTabNavigations');
+            //     }
+            // })
+            // .catch(() => console.log('erorr here'));
     }
 
     render() {
