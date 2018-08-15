@@ -13,6 +13,7 @@
     "react": "16.4.1",
     "react-native": "0.56.0",
     "react-native-facebook-account-kit": "^0.10.1",
+    "react-native-midtrans": "git+https://github.com/radiegtya/react-native-midtrans.git",
     "react-navigation": "^2.9.3"
   },
   "devDependencies": {

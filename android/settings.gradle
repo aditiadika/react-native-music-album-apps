@@ -1,4 +1,6 @@
 rootProject.name = 'Albums'
+include ':react-native-midtrans'
+project(':react-native-midtrans').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-midtrans/android')
 include ':react-native-facebook-account-kit'
 project(':react-native-facebook-account-kit').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-facebook-account-kit/android')
 
