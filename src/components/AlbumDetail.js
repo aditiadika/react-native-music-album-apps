@@ -24,14 +24,13 @@ class AlbumDetail extends Component {
     }
 
     render() {
-        const { title, artist, thumbnail_image, image } = this.props.album;
-
+        const { album: { title, artist, thumbnail_image, image, price } } = this.props;
         return (
             <Card>
-                <AlbumModal 
-                modalVisible={this.state.modalVisible} 
-                cb={this} 
-                onModalClosed={this.modalClosedHandler}
+                <AlbumModal
+                    modalVisible={this.state.modalVisible}
+                    cb={this}
+                    onModalClosed={this.modalClosedHandler}
                 />
 
                 <CardSection>
@@ -39,8 +38,9 @@ class AlbumDetail extends Component {
                         <Image source={{ uri: thumbnail_image }} style={styles.thumbnailStyle} />
                     </View>
                     <View style={styles.headerContentStyle}>
-                        <Text style={styles.titleTextStyle}>{title}</Text>
-                        <Text>{artist}</Text>
+                        <Text style={styles.titleTextStyle}>Album: {title}</Text>
+                        <Text>Artist: {artist}</Text>
+                        <Text>Price: {price}</Text>
                     </View>
                 </CardSection>
 
@@ -51,7 +51,7 @@ class AlbumDetail extends Component {
                 </CardSection>
 
                 <CardSection>
-                    <Button onPress={() => this.albumSelectedHandler({ title, artist, thumbnail_image, image })}>
+                    <Button onPress={() => this.albumSelectedHandler({ title, artist, thumbnail_image, image, price })}>
                         Buy Now
                     </Button>
                 </CardSection>

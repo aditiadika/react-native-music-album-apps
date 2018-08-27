@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, DrawerNavigator } from 'react-navigation';
 import { Footer, FooterTab, Button, Icon } from 'native-base';
 import MusicAlbum from './MusicAlbum';
 import HistoryTransaction from './HistoryTransaction';
@@ -29,7 +29,7 @@ const AlbumTabNavigation = TabNavigator({
                     onPress={() => props.navigation.navigate('HistoryTransaction')}
                     >
                         <Icon name='card' />
-                        <Text style={{ color: 'white' }}>History Transaction</Text>
+                        <Text style={{ color: 'white' }}>Transaction</Text>
                     </Button>
                 </FooterTab>
             </Footer>
@@ -37,4 +37,25 @@ const AlbumTabNavigation = TabNavigator({
     }
 });
 
-export default AlbumTabNavigation;
+const DrawerWithLogoutButton = (props) => (
+    props.navigation.navigate('login')
+);
+
+const TransactionButton = (props) => (
+    props.navigation.navigate('HistoryTransaction')
+);
+
+const Drawer = DrawerNavigator({
+    Home: {
+      screen: AlbumTabNavigation,
+    },
+    Transaction: {
+        screen: TransactionButton
+    },
+    Logout: {
+        screen: DrawerWithLogoutButton
+    },
+
+});
+
+export default Drawer;

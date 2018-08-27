@@ -1,9 +1,10 @@
-import { createDrawerNavigator } from 'react-navigation';
+import { DrawerNavigator } from 'react-navigation';
 import MusicAlbum from './MusicAlbum';
-import Logout from './Logout';
 
-const Drawer = createDrawerNavigator({
-    home: Logout
+const Drawer = DrawerNavigator({
+    Home: {
+      screen: MusicAlbum,
+    },
 });
 
 export default Drawer;

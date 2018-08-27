@@ -9,10 +9,11 @@ class MusicAlbum extends Component {
   }
   
   render() {
+    const { navigation } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <Header headerText={'Music Albums'} />
-        <AlbumList />
+        <AlbumList navigation={navigation} />
       </View>
     );
   }

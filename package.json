@@ -10,8 +10,10 @@
     "axios": "^0.18.0",
     "firebase": "^4.9.1",
     "native-base": "^2.7.2",
+    "querystring": "^0.2.0",
     "react": "16.4.1",
     "react-native": "0.56.0",
+    "react-native-fabric": "^0.5.1",
     "react-native-facebook-account-kit": "^0.10.1",
     "react-native-midtrans": "git+https://github.com/radiegtya/react-native-midtrans.git",
     "react-navigation": "^2.9.3"

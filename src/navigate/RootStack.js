@@ -1,7 +1,5 @@
-import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
-import MusicAlbum from './MusicAlbum';
+import { createStackNavigator } from 'react-navigation';
 import LoginScreen from './LoginScreen';
-import Logout from './Logout';
 import AlbumTabNavigation from './AlbumTabNavigation';
 
 const RootStack = createStackNavigator(
@@ -16,10 +14,5 @@ const RootStack = createStackNavigator(
         }
     }
 );
-
-// const RootStack = createDrawerNavigator({
-//     Home: MusicAlbum,
-//     LogOut: Logout
-// });
 
 export default RootStack;
